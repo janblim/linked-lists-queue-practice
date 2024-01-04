@@ -20,8 +20,8 @@ class DoublyLinkedList {
         // Add node of val to head of linked list
         let newNode = new DoublyLinkedNode(val);
 
-        if (this.length >= 0) {
-            this.head.previous = newNode;
+        if (this.length > 0) {
+            this.head.prev = newNode;
             newNode.next = this.head;
             this.head = newNode;
         } else {
@@ -35,41 +35,83 @@ class DoublyLinkedList {
     }
 
     addToTail(val) {
-        // Add node of val to tail of linked list
+        const node = new DoublyLinkedNode(val);
 
-        // Your code here 
+        if (this.length === 0) {
+            this.head = node;
+            this.tail = node;
+            this.length++;
+        } else {
+            node.prev = this.tail;
+            this.tail.next = node;
+            this.tail = node;
+            this.length++;
+        }
 
         // Write your hypothesis on the time complexity of this method here
     }
 
     removeFromHead() {
-        // Remove node at head
-
-        // Your code here 
-
+        let head = this.head;
+        if (this.length === 1) {
+            this.head = null;
+            this.length--;
+            return head.value;
+        } else if (this.length >= 2) {
+            this.head = this.head.next;
+            this.head.prev = null;
+            this.length--;
+            return head.value;
+        } else {
+            return undefined;
+        }
         // Write your hypothesis on the time complexity of this method here
     }
 
     removeFromTail() {
-        // Remove node at tail
+        let tail = this.tail;
+        if (this.length === 1) {
+            this.tail = null;
+            this.length--;
+            return tail.value;
+        } else if (this.length >= 2) {
+            this.tail = this.tail.prev;
+            this.tail.next = null;
+            this.length--;
+            return tail.value;
+        } else {
+            return undefined;
+        }
 
-        // Your code here 
+        /* let tail = this.tail;
+        if (this.length === 0) {
+            return undefined;
+        }
+        else if (this.length >= 2) {
+        this.tail = this.tail.prev;
+        this.tail.next = null;
+        this.length--;
+        return tail.value;
+        } */
 
         // Write your hypothesis on the time complexity of this method here
     }
 
     peekAtHead() {
-        // Return value of head node
-
-        // Your code here 
+        if (this.head) {
+            return this.head.value;
+        } else {
+            return undefined;
+        }
 
         // Write your hypothesis on the time complexity of this method here
     }
 
     peekAtTail() {
-        // Return value of tail node
-
-        // Your code here 
+        if (this.length === 0) {
+            return undefined;
+        }
+       return this.tail.value;
 
         // Write your hypothesis on the time complexity of this method here
     }
